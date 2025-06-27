@@ -1,0 +1,37 @@
+reddit:
+  client_id: ${REDDIT_CLIENT_ID}
+  client_secret: ${REDDIT_CLIENT_SECRET}
+  user_agent: "value_radar/0.1 by yonatanlou"
+
+scraper:
+  days_back: 7
+  max_posts: 800
+  subreddit: "valueinvesting"
+
+ticker_extractor:
+  top_n: 15
+  min_mentions: 2
+
+analyzer:
+  discount_rate: 0.08
+  terminal_growth: 0.02
+  explicit_growth: 0.06
+  growth_years: 5
+
+ranker:
+  weights:
+    mos: 0.4
+    quality: 0.3
+    health: 0.2
+    popularity: 0.1
+  thresholds:
+    buy: 75
+    hold: 50
+
+output:
+  save_csv: true
+  csv_path: "reports"
+  console_display: true
+
+logging:
+  level: "INFO" 
