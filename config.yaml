@@ -9,8 +9,8 @@ scraper:
   subreddit: "valueinvesting"
 
 ticker_extractor:
-  top_n: 15
-  min_mentions: 2
+  top_n: 50
+  min_mentions: 1
 
 analyzer:
   discount_rate: 0.08
