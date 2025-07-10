@@ -63,8 +63,8 @@ def test_smart_ticker_extraction():
     results = extractor.extract_tickers(test_posts)
     
     print(f"\nExtracted {len(results)} tickers:")
-    for ticker, score, count in results:
-        print(f"  {ticker}: score={score:.2f}, mentions={count}")
+    for ticker, score, count, links in results:
+        print(f"  {ticker}: score={score:.2f}, mentions={count}, links={len(links)}")
     
     # Test individual text processing
     print("\n" + "=" * 50)

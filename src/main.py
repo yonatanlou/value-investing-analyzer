@@ -10,14 +10,19 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+# Add the project root to Python path for imports
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 import yaml
 from dotenv import load_dotenv
 
-from .reddit_scraper import RedditScraper
-from .ticker_extractor import TickerExtractor
-from .value_analyzer import ValueAnalyzer
-from .ranker import Ranker
-from .output_writer import OutputWriter
+# Use absolute imports for better compatibility
+from src.reddit_scraper import RedditScraper
+from src.ticker_extractor import TickerExtractor
+from src.value_analyzer import ValueAnalyzer
+from src.ranker import Ranker
+from src.output_writer import OutputWriter
 
 
 def setup_logging(config: Dict) -> None:

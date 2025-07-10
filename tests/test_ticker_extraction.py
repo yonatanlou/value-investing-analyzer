@@ -52,8 +52,8 @@ def test_ticker_extraction():
         
         print(f"Found {len(tickers)} tickers")
         print(f"Top 10 tickers:")
-        for i, (ticker, score, count) in enumerate(tickers[:10], 1):
-            print(f"  {i:2d}. {ticker:6s} (score: {score:6.1f}, mentions: {count})")
+        for i, (ticker, score, count, links) in enumerate(tickers[:10], 1):
+            print(f"  {i:2d}. {ticker:6s} (score: {score:6.1f}, mentions: {count}, links: {len(links)})")
         
         if len(tickers) > 10:
             print(f"  ... and {len(tickers) - 10} more")

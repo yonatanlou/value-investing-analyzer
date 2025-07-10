@@ -5,12 +5,12 @@ reddit:
 
 scraper:
   days_back: 7
-  max_posts: 800
+  max_posts: 200
   subreddit: "valueinvesting"
 
 ticker_extractor:
   top_n: 50
-  min_mentions: 1
+  min_mentions: 5
 
 analyzer:
   discount_rate: 0.08
@@ -25,12 +25,14 @@ ranker:
     health: 0.2
     popularity: 0.1
   thresholds:
-    buy: 75
+    buy: 60
     hold: 50
 
 output:
   save_csv: true
   csv_path: "reports"
+  save_html: true
+  html_path: "reports"
   console_display: true
 
 logging:

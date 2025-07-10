@@ -30,7 +30,7 @@ class TestTickerExtractor:
     def test_find_tickers_regex(self):
         """Test ticker extraction using regex patterns."""
         text = "I think AAPL and MSFT are great investments. Also $TSLA and GOOGL."
-        tickers = self.extractor._find_tickers(text)
+        tickers = self.extractor._find_tickers_smart(text)
         
         # Should find valid tickers
         assert 'AAPL' in tickers
@@ -41,7 +41,7 @@ class TestTickerExtractor:
     def test_find_tickers_invalid(self):
         """Test that invalid tickers are filtered out."""
         text = "I think INVALID and TOOLONG are not real tickers."
-        tickers = self.extractor._find_tickers(text)
+        tickers = self.extractor._find_tickers_smart(text)
         
         # Should not find invalid tickers
         assert 'INVALID' not in tickers
@@ -76,8 +76,8 @@ class TestTickerExtractor:
         assert len(tickers) > 0
         
         # AAPL should have higher score due to multiple mentions
-        aapl_score = next((score for ticker, score, count in tickers if ticker == 'AAPL'), 0)
-        msft_score = next((score for ticker, score, count in tickers if ticker == 'MSFT'), 0)
+        aapl_score = next((score for ticker, score, count, links in tickers if ticker == 'AAPL'), 0)
+        msft_score = next((score for ticker, score, count, links in tickers if ticker == 'MSFT'), 0)
         
         assert aapl_score > msft_score
     
@@ -109,7 +109,7 @@ class TestTickerExtractor:
         tickers = self.extractor.extract_tickers(posts)
         
         # Only MSFT should appear (mentioned twice)
-        ticker_symbols = [ticker for ticker, score, count in tickers]
+        ticker_symbols = [ticker for ticker, score, count, links in tickers]
         assert 'MSFT' in ticker_symbols
         assert 'AAPL' not in ticker_symbols
     

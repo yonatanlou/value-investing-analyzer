@@ -77,7 +77,7 @@ class RedditScraper:
                     'score': submission.score,
                     'num_comments': submission.num_comments,
                     'created_utc': submission.created_utc,
-                    'permalink': submission.permalink,
+                    'permalink': f"https://www.reddit.com{submission.permalink}",
                     'id': submission.id
                 }
                 posts.append(post_data)
@@ -123,7 +123,7 @@ class RedditScraper:
                     'score': post.get('score', 0),
                     'num_comments': post.get('num_comments', 0),
                     'created_utc': post.get('created_utc', 0),
-                    'permalink': f"https://reddit.com{post.get('permalink', '')}",
+                    'permalink': f"https://www.reddit.com{post.get('permalink', '')}",
                     'id': post.get('id', '')
                 }
                 posts.append(post_data)

@@ -20,13 +20,13 @@ class ValueAnalyzer:
         self.config = config
         self.analyzer_config = config.get('analyzer', {})
         
-    def analyze_tickers(self, tickers: List[Tuple[str, float, int]]) -> List[Dict]:
+    def analyze_tickers(self, tickers: List[Tuple[str, float, int, List[str]]]) -> List[Dict]:
         """Analyze a list of tickers and return fundamental data."""
         results = []
         
-        for ticker, popularity_score, mention_count in tickers:
+        for ticker, popularity_score, mention_count, reddit_links in tickers:
             try:
-                analysis = self._analyze_single_ticker(ticker, popularity_score, mention_count)
+                analysis = self._analyze_single_ticker(ticker, popularity_score, mention_count, reddit_links)
                 if analysis:
                     results.append(analysis)
                     logger.info(f"Analyzed {ticker}: MOS={analysis.get('margin_of_safety', 0):.1f}%")
@@ -40,7 +40,7 @@ class ValueAnalyzer:
         logger.info(f"Successfully analyzed {len(results)} out of {len(tickers)} tickers")
         return results
     
-    def _analyze_single_ticker(self, ticker: str, popularity_score: float, mention_count: int) -> Optional[Dict]:
+    def _analyze_single_ticker(self, ticker: str, popularity_score: float, mention_count: int, reddit_links: List[str]) -> Optional[Dict]:
         """Analyze a single ticker and return fundamental metrics."""
         try:
             # Get stock data
@@ -66,6 +66,7 @@ class ValueAnalyzer:
                 'ticker': ticker,
                 'popularity_score': popularity_score,
                 'mention_count': mention_count,
+                'reddit_links': reddit_links,
                 **metrics,
                 **dcf_result
             }
